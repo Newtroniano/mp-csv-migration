@@ -1,4 +1,7 @@
 package com.luis.multiportal.controllers;
+import com.luis.multiportal.dto.UserCreateDTO;
+import com.luis.multiportal.dto.UserResponseDTO;
+import com.luis.multiportal.services.ApiResponse;
 import com.luis.multiportal.services.UserService;
 import com.luis.multiportal.models.User;
 import jakarta.validation.Valid;
@@ -21,9 +24,26 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<Void> create(@Valid @RequestBody User obj){
-        this.userService.create(obj);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-        return ResponseEntity.created(uri).build();
+    public ResponseEntity<ApiResponse<UserResponseDTO>> create(@Valid @RequestBody UserCreateDTO dto) {
+        User user = new User();
+        user.setUser(dto.getUser());
+        user.setPassword(dto.getPassword());
+
+        User created = userService.create(user);
+
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(created.getId())
+                .toUri();
+
+        UserResponseDTO responseDTO = new UserResponseDTO(Math.toIntExact(created.getId()), created.getUser());
+
+        ApiResponse<UserResponseDTO> response = new ApiResponse<>(
+                201,
+                "Usuário criado com sucesso",
+                responseDTO
+        );
+
+        return ResponseEntity.created(uri).body(response);
     }
 }
