@@ -11,7 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 public class UserController {
-
+    @Autowired
     private UserService userService;
 
     @PostMapping
