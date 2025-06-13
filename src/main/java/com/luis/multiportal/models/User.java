@@ -27,7 +27,7 @@ public class User {
     @Column(name = "id", unique = true)
     private Long id;
 
-    @Column(name = "username", length = 100, nullable = false, unique = true)
+    @Column(name = "user", length = 100, nullable = false, unique = true)
     @NotBlank()
     @Size(min = 2, max = 100)
     private String username;
@@ -41,8 +41,8 @@ public class User {
 
     @ElementCollection(fetch = FetchType.EAGER)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @CollectionTable(name = "user_profile")
-    @Column(name = "profile", nullable = false)
+    @CollectionTable(name = "user_role")
+    @Column(name = "role", nullable = false)
     private Set<Integer> profiles = new HashSet<>();
 
     public Set<RoleEnum> getProfiles(){
