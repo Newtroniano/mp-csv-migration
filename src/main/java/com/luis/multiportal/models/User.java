@@ -1,11 +1,13 @@
-package com.luis.mptest.luis.models;
+package com.luis.multiportal.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.luis.multiportal.models.enuns.RoleEnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.*;
-import com.luis.mptest.luis.models.enuns.ProfileEnum;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -30,7 +32,7 @@ public class User {
     @Size(min = 2, max = 100)
     private String username;
 
-    //Para a senha não ser retornada no front end
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "password", length = 60, nullable = false)
     @NotBlank
@@ -43,11 +45,11 @@ public class User {
     @Column(name = "profile", nullable = false)
     private Set<Integer> profiles = new HashSet<>();
 
-    public Set<ProfileEnum> getProfiles(){
-        return this.profiles.stream().map(x -> ProfileEnum.toEnum(x)).collect(Collectors.toSet());
+    public Set<RoleEnum> getProfiles(){
+        return this.profiles.stream().map(x -> RoleEnum.toEnum(x)).collect(Collectors.toSet());
     }
 
-    public void addProfile(ProfileEnum profileEnum){
+    public void addProfile(RoleEnum profileEnum){
         this.profiles.add(profileEnum.getCode());
     }
 }
