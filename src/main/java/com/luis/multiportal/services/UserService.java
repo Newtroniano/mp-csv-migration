@@ -7,9 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.luis.multiportal.repositoreis.UserRepository;
 import com.luis.multiportal.models.User;
+import org.springframework.stereotype.Service;
+
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Service
 public class UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;

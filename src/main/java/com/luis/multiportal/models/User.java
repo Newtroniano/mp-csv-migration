@@ -30,7 +30,7 @@ public class User {
     @Column(name = "user", length = 100, nullable = false, unique = true)
     @NotBlank()
     @Size(min = 2, max = 100)
-    private String username;
+    private String user;
 
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
