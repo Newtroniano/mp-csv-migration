@@ -11,7 +11,7 @@ public class LoginResponseDTO {
         this.token = token;
         this.message = message;
     }
-    
+
     public String getUsername() { return username; }
     public String getToken() { return token; }
     public String getMessage() { return message; }

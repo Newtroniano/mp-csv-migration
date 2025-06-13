@@ -13,14 +13,13 @@ import java.util.Objects;
 @Component
 public class JWTUtil {
 
-    //Pega o valor direto da application.properties
+
     @Value("${jwt.secret}")
     private String secret;
 
     @Value("${jwt.expiration}")
     private Long expiration;
 
-    //Metodo para gerar o token
     public String generateToken(String username){
 
         SecretKey key = getKeyBySecret();
@@ -29,12 +28,10 @@ public class JWTUtil {
                 .signWith(key).compact();
     }
 
-    //Metodo para gerar a key
     private SecretKey getKeyBySecret(){
         return Keys.hmacShaKeyFor(this.secret.getBytes());
     }
 
-    //Verifica se o token e valido
     public boolean isValidToken(String token) {
         Claims claims = getClaims(token);
         if (Objects.nonNull(claims)) {
