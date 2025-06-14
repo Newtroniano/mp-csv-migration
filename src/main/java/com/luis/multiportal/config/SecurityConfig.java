@@ -37,7 +37,8 @@ public class SecurityConfig {
     private JWTUtil jwtUtil;
 
     private static final String[] PUBLIC_MATCHERS = {
-            "/"
+            "/",
+            "/index.html",
     };
 
     private static final String[] PUBLIC_MATCHERS_POST = {
