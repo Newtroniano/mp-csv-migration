@@ -1,4 +1,4 @@
-package com.luis.multiportal.services;
+package com.luis.multiportal.controllers;
 
 import lombok.Setter;
 

@@ -1,7 +1,6 @@
 package com.luis.multiportal.controllers;
 import com.luis.multiportal.dto.UserCreateDTO;
 import com.luis.multiportal.dto.UserResponseDTO;
-import com.luis.multiportal.services.ApiResponse;
 import com.luis.multiportal.services.UserService;
 import com.luis.multiportal.models.User;
 import jakarta.validation.Valid;
