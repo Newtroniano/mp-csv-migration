@@ -38,7 +38,8 @@ public class SecurityConfig {
 
     private static final String[] PUBLIC_MATCHERS = {
             "/",
-            "/index.html",
+            "/index",
+            "/upload"
     };
 
     private static final String[] PUBLIC_MATCHERS_POST = {

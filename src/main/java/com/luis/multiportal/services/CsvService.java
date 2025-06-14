@@ -26,7 +26,7 @@ public class CsvService {
         List<Persons> personsList = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
-            // Pular cabeçalho
+
             reader.readLine();
 
             String line;

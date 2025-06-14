@@ -8,7 +8,12 @@ public class ViewController {
 
     @GetMapping("/")
     public String index() {
-        return "index"; // Thymeleaf vai procurar templates/index.html
+        return "index";
+    }
+
+    @GetMapping("/upload")
+    public String upload() {
+        return "upload";
     }
 
 }

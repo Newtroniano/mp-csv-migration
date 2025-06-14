@@ -28,7 +28,8 @@
       if (res.ok) {
         const data = await res.json();
         localStorage.setItem('token', data.token);
-        window.location.href = 'upload.html';
+
+        window.location.href = 'upload';
       } else {
         alert('Login inválido');
       }
