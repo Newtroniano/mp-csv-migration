@@ -14,20 +14,20 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name = User.TABLE_NAME)
+@Table(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class User {
 
-    public static final String TABLE_NAME = "user";
+    public static final String TABLE_NAME = "users";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true)
     private Long id;
 
-    @Column(name = "user", length = 100, nullable = false, unique = true)
+    @Column(name = "username", length = 100, nullable = false, unique = true)
     @NotBlank()
     @Size(min = 2, max = 100)
     private String user;
