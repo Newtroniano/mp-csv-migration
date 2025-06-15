@@ -20,6 +20,9 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
     private UserDetailsService userDetailsService;
 
+
+
+
     public JWTAuthorizationFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil, UserDetailsService userDetailsService) {
         super(authenticationManager);
         this.jwtUtil = jwtUtil;
@@ -29,6 +32,8 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws IOException, ServletException {
+
+
 
         String authorizationHeader = request.getHeader("Authorization");
         if (Objects.nonNull(authorizationHeader) && authorizationHeader.startsWith("Bearer ")) {
