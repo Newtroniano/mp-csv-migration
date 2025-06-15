@@ -54,18 +54,15 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String username = userSpringSecurity.getUsername();
         String token = this.jwtUtil.generateToken(username);
 
-        // Cria o DTO com os dados da resposta
         LoginResponseDTO responseDTO = new LoginResponseDTO(
                 username,
                 token,
                 "Login realizado com sucesso"
         );
 
-        // Adiciona o token no header (como você já fazia)
         response.addHeader("Authorization", "Bearer " + token);
         response.addHeader("access-control-expose-headers", "Authorization");
 
-        // Configura a resposta JSON no corpo
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setStatus(HttpServletResponse.SC_OK);
         response.getWriter().write(new ObjectMapper().writeValueAsString(responseDTO));

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Upload CSV</title>
+    <link th:href="@{/css/upload.css}" rel="stylesheet">
+</head>
+<body>
+
+<h2>Upload de CSV</h2>
+
+<input type="file" id="fileInput" />
+
+<div class="button-group">
+    <button onclick="uploadFile()">Enviar</button>
+    <button onclick="listarPessoas()">Listar</button>
+    <button onclick="exportarCSV()">ExportarCSV</button>
+</div>
+
+<div id="resultado"  style="margin-top:20px;"></div>
+<div id="uploadInfo" style="margin-top:20px;"></div>
+
+
+<script th:src="@{/js/upload.js}"></script>
+</body>
+</html>

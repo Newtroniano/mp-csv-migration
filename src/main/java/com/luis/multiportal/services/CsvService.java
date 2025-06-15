@@ -1,7 +1,4 @@
 package com.luis.multiportal.services;
-
-
-
 import com.luis.multiportal.models.Persons;
 import com.luis.multiportal.repositoreis.PersonsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -26,7 +24,7 @@ public class CsvService {
         List<Persons> personsList = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
-            // Pular cabeçalho
+
             reader.readLine();
 
             String line;
@@ -53,6 +51,9 @@ public class CsvService {
                 }
             }
         }
+
+        personsList.sort(Comparator.comparing(Persons::getNome, String.CASE_INSENSITIVE_ORDER));
+
         return personsList;
     }
 
