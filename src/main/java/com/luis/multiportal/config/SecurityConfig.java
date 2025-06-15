@@ -50,7 +50,9 @@ public class SecurityConfig {
     private static final String[] PUBLIC_MATCHERS = {
             "/",
             "/index",
-            "/upload"
+            "/upload",
+            "/criar",
+            "/login"
     };
 
     private static final String[] PUBLIC_MATCHERS_POST = {
