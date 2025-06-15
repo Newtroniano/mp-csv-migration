@@ -2,117 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Upload CSV</title>
-    <link rel="stylesheet" th:href="@{/css/upload.css}">
-
+    <link th:href="@{/css/upload.css}" rel="stylesheet">
 </head>
 <body>
 
 <h2>Upload de CSV</h2>
 
 <input type="file" id="fileInput" />
-<button onclick="uploadFile()">Enviar</button>
-<button onclick="listarPessoas()">Listar</button>
 
-<div id="resultado" style="margin-top:20px;"></div>
+<div class="button-group">
+    <button onclick="uploadFile()">Enviar</button>
+    <button onclick="listarPessoas()">Listar</button>
+    <button onclick="exportarCSV()">ExportarCSV</button>
+</div>
 
-<script>
-    let token;
-
-    // Executa assim que a página carregar
-    window.onload = () => {
-        token = localStorage.getItem('token');
-        if (!token) {
-            alert('Você precisa estar logado');
-            window.location.href = '/';
-        } else {
-            console.log('Token carregado:', token);
-        }
-    };
-
-    async function listarPessoas() {
-        try {
-            const res = await fetch('/persons/export', {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + token
-                }
-            });
-
-            if (!res.ok) {
-                throw new Error('Erro ao buscar os dados: ' + res.statusText);
-            }
-
-            const csvText = await res.text();
-            const linhas = csvText.trim().split('\n');
-            const cabecalhos = linhas[0].split(',');
-
-            let html = '<table border="1"><thead><tr>';
-            cabecalhos.forEach(h => html += `<th>${h}</th>`);
-            html += '</tr></thead><tbody>';
-
-            for (let i = 1; i < linhas.length; i++) {
-                const colunas = linhas[i].split(',');
-                html += '<tr>';
-                colunas.forEach(c => html += `<td>${c.replace(/"/g, '')}</td>`);
-                html += '</tr>';
-            }
-
-            html += '</tbody></table>';
-            document.getElementById('resultado').innerHTML = html;
-
-        } catch (err) {
-            alert(err.message);
-        }
-    }
-
-    async function uploadFile() {
-        const fileInput = document.getElementById('fileInput');
-        if (fileInput.files.length === 0) {
-            alert('Selecione um arquivo CSV');
-            return;
-        }
-
-        const formData = new FormData();
-        formData.append('file', fileInput.files[0]);
-
-        try {
-            const res = await fetch('/persons/upload', {
-                method: 'POST',
-                headers: {
-                    'Authorization': 'Bearer ' + token
-                },
-                body: formData
-            });
-
-            if (!res.ok) {
-                throw new Error('Erro ao enviar arquivo: ' + res.statusText);
-            }
-
-            const data = await res.json();
-
-            let html = `<p><strong>${data.message}</strong></p>`;
-            html += `<p>Total de registros: ${data.totalRegistros}</p>`;
-
-            html += `<p><strong>Contagem por Sexo:</strong></p><ul>`;
-            for (const sexo in data.contagemPorSexo) {
-                html += `<li>${sexo}: ${data.contagemPorSexo[sexo]}</li>`;
-            }
-            html += `</ul>`;
-
-            html += `<p><strong>Média de idade por Sexo:</strong></p><ul>`;
-            for (const sexo in data.mediaIdadePorSexo) {
-                html += `<li>${sexo}: ${data.mediaIdadePorSexo[sexo].toFixed(2)}</li>`;
-            }
-            html += `</ul>`;
-
-            document.getElementById('resultado').innerHTML = html;
-
-        } catch (err) {
-            alert(err.message);
-        }
-    }
-</script>
+<div id="resultado"  style="margin-top:20px;"></div>
+<div id="uploadInfo" style="margin-top:20px;"></div>
 
 
+<script th:src="@{/js/upload.js}"></script>
 </body>
 </html>
