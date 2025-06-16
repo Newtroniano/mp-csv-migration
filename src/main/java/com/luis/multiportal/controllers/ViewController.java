@@ -16,4 +16,14 @@ public class ViewController {
         return "upload";
     }
 
+    @GetMapping("/criar")
+    public String criar() {
+        return "criar";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
 }

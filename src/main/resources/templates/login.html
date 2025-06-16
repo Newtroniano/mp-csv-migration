@@ -1,0 +1,20 @@
+<!-- static/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link th:href="@{/css/login.css}" rel="stylesheet">
+</head>
+<body>
+
+<form id="loginForm">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Usuário" required><br>
+    <input type="password" id="password" placeholder="Senha" required><br>
+    <button type="submit">Entrar</button>
+</form>
+
+<script th:src="@{/js/login.js}"></script>
+</body>
+</html>
