@@ -51,8 +51,7 @@ public class JWTUtil {
         }
         return null;
     }
-
-    //Decrita o token
+    
     private Claims getClaims(String token){
         SecretKey key = getKeyBySecret();
         try {
