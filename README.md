@@ -80,3 +80,16 @@ Caso não utilize Docker, é necessário:
 2. Criar o banco de dados chamado csv_reader manualmente.
 
 
+### 4. Usando a aplicação 
+
+Após abrir a página inicial, você poderá fazer login com o usuário padrão ou criar um novo usuário. Em seguida, utilize este CSV para realizar a migração dos dados: [dados para migração](https://drive.google.com/file/d/1Fhz6xBHluGdkfjVskpDw3KPpsTHohow4/view?usp=drive_link).
+
+Ao enviar o arquivo, os dados serão salvos no banco de dados. Em seguida, a aplicação exibirá:
+
+- A quantidade de homens e mulheres;
+- A média de idade por sexo;
+- Os nomes ordenados, conforme mostrado no exemplo:
+
+![Exemplo](exe.png)
+
+Após importar os dados, você pode exportá-los com os nomes em ordem e com as datas de nascimento corrigidas no formato CSV.
