@@ -25,3 +25,5 @@ document.getElementById("cadastro-form").addEventListener("submit", async functi
     alert("Erro de conexão. Tente novamente.");
   }
 });
+
+function voltar(){window.location.href = '/';}

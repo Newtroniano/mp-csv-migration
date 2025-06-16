@@ -174,3 +174,5 @@ async function uploadFile() {
         link.click();
         document.body.removeChild(link);
  }
+
+function voltar(){window.location.href = '/';}
