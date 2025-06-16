@@ -90,6 +90,8 @@ Ao enviar o arquivo, os dados serão salvos no banco de dados. Em seguida, a apl
 - A média de idade por sexo;
 - Os nomes ordenados, conforme mostrado no exemplo:
 
+***Depois de enviar, você poderá clicar no botão Listar para exibir a lista dos registros.***
+
 ![Exemplo](exe.png)
 
-Após importar os dados, você pode exportá-los com os nomes em ordem e com as datas de nascimento corrigidas no formato CSV.
+Após importar os dados, você pode exportá-los ao clicar no botão ExportarCSV com os nomes em ordem e com as datas de nascimento corrigidas no formato CSV.
