@@ -5,7 +5,7 @@ body {
 }
 
 .menu {
-    background-color: #004080;
+
     padding: 10px 0;
 }
 
@@ -22,18 +22,18 @@ body {
 }
 
 .menu ul li a {
-    color: white;
+ 
     text-decoration: none;
     font-weight: bold;
     padding: 8px 12px;
     display: block;
     border-radius: 4px;
-    transition: background-color 0.3s ease;
+   
 }
 
 .menu ul li a:hover,
 .menu ul li a:focus {
-    background-color: #0073e6;
+    
     outline: none;
 }
 

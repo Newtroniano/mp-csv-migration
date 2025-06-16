@@ -2,7 +2,7 @@ let token;
 let currentPage = 1;
 const rowsPerPage = 10;
 let tableData = { headers: [], rows: [] };
-let token;
+
 window.onload = () => {
      token = localStorage.getItem('token');
 
@@ -17,7 +17,7 @@ window.onload = () => {
 
 async function listarPessoas() {
     try {
-        const res = await fetch('/persons/export', {
+        const res = await fetch('persons/list', {
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token
