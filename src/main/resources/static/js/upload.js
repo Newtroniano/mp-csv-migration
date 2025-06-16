@@ -9,8 +9,6 @@ window.onload = () => {
     if (!token) {
         alert('Você precisa estar logado');
         window.location.href = 'login';
-    } else {
-        console.log('Token carregado:', token);
     }
 };
 

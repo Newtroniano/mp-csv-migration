@@ -35,3 +35,10 @@ CREATE TABLE IF NOT EXISTS public.user_role
 );
 
 ALTER TABLE public.user_role OWNER TO postgres;
+
+
+INSERT INTO public.users (username, password)
+VALUES ('admin', '$2y$12$XWzFZx6j9UZ1z5JHDcZIFeByJgC8XtB1MHXPtQhrM9N/UQx8UwJ/2');
+
+INSERT INTO public.user_role (user_id, role)
+SELECT id, 1 FROM public.users WHERE username = 'admin'

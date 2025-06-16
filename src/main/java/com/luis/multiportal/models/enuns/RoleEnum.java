@@ -9,8 +9,8 @@ import java.util.Objects;
 @Getter
 public enum RoleEnum {
 
-    ADMIN(1, "ROLE_ADMIN"),
-    USER(2, "ROLE_USER");
+    ADMIN(1, "ROLE_ADMIN");
+
 
     private Integer code;
     private String description;
