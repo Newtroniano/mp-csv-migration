@@ -10,7 +10,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/csvreader
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=root
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=none
       - SPRING_JPA_SHOW_SQL=false
       - SERVER_ERROR_INCLUDE_EXCEPTION=false
       #- Caso queira o secret nas variaveis de ambiente --> JWT_SECRET=${JWT}
