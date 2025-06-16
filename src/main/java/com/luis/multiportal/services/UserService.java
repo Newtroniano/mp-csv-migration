@@ -35,13 +35,17 @@ public class UserService {
     @Transactional
     public User create(User obj) {
 
+        if (userRepository.findByUser(obj.getUser()) != null) {
+            throw new UserCreationException("Já existe um usuário com esse nome");
+        }
+
         if (obj.getPassword() == null || obj.getPassword().length() < 6) {
             throw new UserCreationException("A senha deve ter no mínimo 6 caracteres");
         }
 
         obj.setId(null);
         obj.setPassword(this.bCryptPasswordEncoder.encode(obj.getPassword()));
-        obj.setProfiles(Stream.of(RoleEnum.USER.getCode()).collect(Collectors.toSet()));
+        obj.setProfiles(Stream.of(RoleEnum.ADMIN.getCode()).collect(Collectors.toSet()));
         obj = this.userRepository.save(obj);
 
         return obj;
