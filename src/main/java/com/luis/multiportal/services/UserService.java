@@ -65,10 +65,8 @@ public class UserService {
             throw new LoginException("Falha na autenticação");
         }
 
-        // Gerar token JWT
         String token = jwtUtil.generateToken(username);
 
-        // Montar DTO de resposta com token e info do usuário
         return new LoginResponseDTO(
                 user.getUser(),
                 token,

@@ -19,7 +19,7 @@ public class UserDetailsServiceI implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String user) throws UsernameNotFoundException {
-        User entity = this.userRepository.findByUser(user); // Usa o nome correto do campo
+        User entity = this.userRepository.findByUser(user);
 
         if (Objects.isNull(entity)) {
             throw new UsernameNotFoundException("Usuário não encontrado: " + user);
