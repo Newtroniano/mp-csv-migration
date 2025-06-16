@@ -36,9 +36,9 @@ Projeto desenvolvido para o desafio do processo seletivo da Multi Portal. O obje
 
 ## Login padrão
 
-| Usuário | Senha  |
-|---------|---------|
-| admin   | 123456  |
+| Usuário | Senha    |
+|---------|----------|
+| admin   | admin123 |
 
 ---
 
