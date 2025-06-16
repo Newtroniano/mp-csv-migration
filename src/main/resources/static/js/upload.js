@@ -2,16 +2,18 @@ let token;
 let currentPage = 1;
 const rowsPerPage = 10;
 let tableData = { headers: [], rows: [] };
-
+let token;
 window.onload = () => {
-    token = localStorage.getItem('token');
+     token = localStorage.getItem('token');
+
     if (!token) {
         alert('Você precisa estar logado');
-        window.location.href = '/';
+        window.location.href = 'login';
     } else {
         console.log('Token carregado:', token);
     }
 };
+
 
 async function listarPessoas() {
     try {
