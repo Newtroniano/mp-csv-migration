@@ -88,7 +88,7 @@ Ao enviar o arquivo, os dados serão salvos no banco de dados. Em seguida, a apl
 
 - A quantidade de homens e mulheres;
 - A média de idade por sexo;
-- Os nomes ordenados, conforme mostrado no exemplo:
+- Os nomes ordenados, conforme mostrado na imagem abaixo:
 
 ***Depois de enviar, você poderá clicar no botão Listar para exibir a lista dos registros.***
 
