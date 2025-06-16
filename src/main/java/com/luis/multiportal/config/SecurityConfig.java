@@ -1,6 +1,6 @@
 package com.luis.multiportal.config;
 
-import com.luis.multiportal.security.JWTAuthenticationFilter;
+
 import com.luis.multiportal.security.JWTAuthorizationFilter;
 import com.luis.multiportal.security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +57,7 @@ public class SecurityConfig {
 
     private static final String[] PUBLIC_MATCHERS_POST = {
             "/user",
-            "/login"
+            "/user/login"
     };
 
 
@@ -76,7 +76,6 @@ public class SecurityConfig {
         AuthenticationManager authenticationManager = authenticationConfiguration.getAuthenticationManager();
 
 
-        http.addFilter(new JWTAuthenticationFilter(authenticationManager, jwtUtil));
         http.addFilter(new JWTAuthorizationFilter(authenticationManager, jwtUtil, userDetailsService));
 
         http.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
@@ -99,4 +98,12 @@ public class SecurityConfig {
 
         return new BCryptPasswordEncoder();
     }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+
+
+
 }
