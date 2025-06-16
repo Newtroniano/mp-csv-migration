@@ -18,3 +18,7 @@
         alert('Login inválido');
       }
     });
+
+function voltar(){window.location.href = '/';}
+
+    

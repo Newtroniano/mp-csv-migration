@@ -14,7 +14,8 @@ document.getElementById("cadastro-form").addEventListener("submit", async functi
     });
 
     if (response.ok) {
-      alert("Usuário cadastrado com sucesso!");
+      alert("Usuário cadastrado com sucesso! Clique em OK para fazer o login");
+      window.location.href ='login'
     } else {
       const error = await response.text();
       alert("Erro ao cadastrar: " + error);
@@ -24,3 +25,5 @@ document.getElementById("cadastro-form").addEventListener("submit", async functi
     alert("Erro de conexão. Tente novamente.");
   }
 });
+
+function voltar(){window.location.href = '/';}

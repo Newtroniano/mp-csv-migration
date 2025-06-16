@@ -62,3 +62,10 @@ h2 {
 #loginForm button:hover {
     background: #0056b3;
 }
+
+.form-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}

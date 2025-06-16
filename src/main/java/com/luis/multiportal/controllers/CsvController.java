@@ -48,7 +48,7 @@ public class CsvController {
         }
     }
 
-    @GetMapping("/export")
+    @GetMapping("/list")
     public ResponseEntity<byte[]> exportarCsv() {
         List<Persons> persons = csvService.listarTodos();
 
