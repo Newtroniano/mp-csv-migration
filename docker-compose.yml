@@ -13,7 +13,8 @@ services:
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
       - SPRING_JPA_SHOW_SQL=false
       - SERVER_ERROR_INCLUDE_EXCEPTION=false
-      - JWT_SECRET=${JWT}
+      #- Caso queira o secret nas variaveis de ambiente --> JWT_SECRET=${JWT}
+      - JWT_SECRET=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30
       - JWT_EXPIRATION=86400000
     depends_on:
       postgres:
