@@ -7,7 +7,10 @@
 <body>
 
 <h2>Upload de CSV</h2>
-
+<h1>Ola!,
+    <span th:if="${usuario != null}" th:text="${usuario}">Usuário</span>
+    <span th:unless="${usuario != null}">Visitante</span>
+</h1>
 <input type="file" id="fileInput" />
 
 <div class="button-group">

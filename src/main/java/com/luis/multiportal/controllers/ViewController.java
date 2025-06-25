@@ -1,7 +1,12 @@
 package com.luis.multiportal.controllers;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.security.Principal;
 
 @Controller
 public class ViewController {
@@ -12,7 +17,11 @@ public class ViewController {
     }
 
     @GetMapping("/upload")
-    public String upload() {
+    public String upload(Model model, Principal principal) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.isAuthenticated()) {
+            model.addAttribute("usuario", auth.getName());
+        }
         return "upload";
     }
 

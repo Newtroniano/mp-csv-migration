@@ -2,6 +2,7 @@ package com.luis.multiportal.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,18 +27,38 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         this.userDetailsService = userDetailsService;
     }
 
+    private String getTokenFromRequest(HttpServletRequest request) {
+        // 1. Tenta pegar do header
+        String header = request.getHeader("Authorization");
+        if (header != null && header.startsWith("Bearer ")) {
+            return header.substring(7);
+        }
+
+        // 2. Tenta pegar do cookie chamado "token"
+        if (request.getCookies() != null) {
+            for (Cookie cookie : request.getCookies()) {
+                if ("token".equals(cookie.getName())) {
+                    return cookie.getValue();
+                }
+            }
+        }
+
+        return null;
+    }
+
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws IOException, ServletException {
 
 
 
-        String authorizationHeader = request.getHeader("Authorization");
-        if (Objects.nonNull(authorizationHeader) && authorizationHeader.startsWith("Bearer ")) {
-            String token = authorizationHeader.substring(7);
+        String token = getTokenFromRequest(request);
+        if (token != null) {
             UsernamePasswordAuthenticationToken auth = getAuthentication(token);
-            if (Objects.nonNull(auth))
+            if (auth != null) {
                 SecurityContextHolder.getContext().setAuthentication(auth);
+            }
         }
         filterChain.doFilter(request, response);
     }

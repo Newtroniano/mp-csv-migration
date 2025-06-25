@@ -68,10 +68,12 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()));
 
         http.authorizeHttpRequests(request -> {
-            request.requestMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll();
+            request.requestMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll(); //ver depois
             request.requestMatchers(PUBLIC_MATCHERS).permitAll();
             request.anyRequest().authenticated();
         });
+
+
 
         AuthenticationManager authenticationManager = authenticationConfiguration.getAuthenticationManager();
 

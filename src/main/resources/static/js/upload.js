@@ -1,15 +1,32 @@
-let token;
 let currentPage = 1;
 const rowsPerPage = 10;
 let tableData = { headers: [], rows: [] };
 
-window.onload = () => {
-     token = localStorage.getItem('token');
+window.onload = async () => {
+  try {
+    const res = await fetch('/user/me', {
+      method: 'GET',
+      credentials: 'include'
+    });
 
-    if (!token) {
-        alert('Você precisa estar logado');
-        window.location.href = 'login';
+    if (res.status === 401) {
+      alert('Você precisa estar logado');
+      window.location.href = 'login';
+      return;
     }
+
+    if (!res.ok) {
+      alert('Erro inesperado');
+      return;
+    }
+
+    const text = await res.text();
+
+
+  } catch (err) {
+    alert('Erro ao verificar autenticação');
+    window.location.href = 'login';
+  }
 };
 
 
@@ -17,9 +34,7 @@ async function listarPessoas() {
     try {
         const res = await fetch('persons/list', {
             method: 'GET',
-            headers: {
-                'Authorization': 'Bearer ' + token
-            }
+            credentials: 'include'
         });
 
         if (!res.ok) throw new Error('Erro ao buscar os dados: ' + res.statusText);
@@ -112,11 +127,9 @@ async function uploadFile() {
 
     try {
         const res = await fetch('/persons/upload', {
-            method: 'POST',
-            headers: {
-                'Authorization': 'Bearer ' + token
-            },
-            body: formData
+              method: 'POST',
+              body: formData,
+              credentials: 'include'
         });
 
         if (!res.ok) {

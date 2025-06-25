@@ -1,10 +1,9 @@
-<!-- static/index.html -->
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link th:href="@{/css/login.css}" rel="stylesheet">
+    <link th:href="@{/css/login.css}" rel="stylesheet" />
 </head>
 <body>
 
@@ -13,8 +12,8 @@
     <input type="text" id="username" placeholder="Usuário" required><br>
     <input type="password" id="password" placeholder="Senha" required><br>
     <div class="form-buttons">
-    <button type="submit">Entrar</button>
-    <button  onclick="voltar()"> Voltar</button>
+        <button type="submit">Entrar</button>
+        <button type="button" onclick="voltar()">Voltar</button>
     </div>
 </form>
 
