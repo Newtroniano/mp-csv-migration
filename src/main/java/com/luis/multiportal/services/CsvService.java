@@ -1,7 +1,11 @@
 package com.luis.multiportal.services;
+import com.luis.multiportal.dto.PersonsDTO;
 import com.luis.multiportal.models.Persons;
 import com.luis.multiportal.repositoreis.PersonsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -81,4 +85,18 @@ public class CsvService {
     public List<Persons> listarTodos() {
         return personsRepository.findAll();
     }
+
+    public Page<PersonsDTO> buscarPaginado(Pageable pageable) {
+        List<Persons> todas = listarTodos();
+        int start = (int) pageable.getOffset();
+        int end = Math.min(start + pageable.getPageSize(), todas.size());
+
+        List<PersonsDTO> pagina = todas.subList(start, end)
+                .stream()
+                .map(PersonsDTO::new)
+                .toList();
+
+        return new PageImpl<>(pagina, pageable, todas.size());
+    }
+
 }

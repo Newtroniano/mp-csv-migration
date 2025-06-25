@@ -2,9 +2,13 @@ package com.luis.multiportal.controllers;
 
 
 
+import com.luis.multiportal.dto.PersonsDTO;
 import com.luis.multiportal.models.Persons;
 import com.luis.multiportal.services.CsvService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -79,6 +83,15 @@ public class CsvController {
                 .headers(headers)
                 .body(outputStream.toByteArray());
     }
+
+
+    @GetMapping("/page")
+    public Page<PersonsDTO> listar(@RequestParam(defaultValue = "0") int page,
+                                   @RequestParam(defaultValue = "5") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return csvService.buscarPaginado(pageable);
+    }
+
 
     @GetMapping
     public ResponseEntity<List<Persons>> listarTodos() {

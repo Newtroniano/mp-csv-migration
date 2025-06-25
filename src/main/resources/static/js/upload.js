@@ -1,7 +1,7 @@
-let currentPage = 1;
+let currentPage = 0;
 const rowsPerPage = 10;
 let tableData = { headers: [], rows: [] };
-
+const pageSize = 10;
 window.onload = async () => {
   try {
     const res = await fetch('/user/me', {
@@ -186,4 +186,43 @@ async function uploadFile() {
         document.body.removeChild(link);
  }
 
+async function carregarPagina(page) {
+    try {
+         const response = await fetch(`/persons/page?page=${page}&size=10`, { credentials: 'include' });
+               if (!response.ok) throw new Error('Erro ao carregar página');
+
+               const data = await response.json();
+
+        const tbody = document.getElementById('tabela-corpo');
+        tbody.innerHTML = ''; // limpa tabela
+
+        data.content.forEach(p => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${p.nome}</td>
+                <td>${p.sobreNome}</td>
+                <td>${p.email}</td>
+                <td>${p.sexo}</td>
+                <td>${p.ipAcesso}</td>
+                <td>${p.idade}</td>
+                <td>${p.nascimento}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+        // Atualiza botões de paginação
+        const pagDiv = document.getElementById('paginacao');
+        pagDiv.innerHTML = `
+            <button onclick="carregarPagina(${data.number - 1})" ${data.first ? 'disabled' : ''}>Anterior</button>
+            <span>Página ${data.number + 1} de ${data.totalPages}</span>
+            <button onclick="carregarPagina(${data.number + 1})" ${data.last ? 'disabled' : ''}>Próximo</button>
+        `;
+
+        currentPage = data.number;
+
+    } catch (error) {
+        alert(error.message);
+    }
+}
+window.onload = () => carregarPagina(0);
 function voltar(){window.location.href = '/';}
