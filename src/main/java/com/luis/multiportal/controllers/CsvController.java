@@ -3,8 +3,12 @@ package com.luis.multiportal.controllers;
 
 
 import com.luis.multiportal.dto.PersonsDTO;
+import com.luis.multiportal.dto.ProcessDTO;
 import com.luis.multiportal.models.Persons;
+import com.luis.multiportal.models.Process;
+import com.luis.multiportal.repositoreis.ProcessRepository;
 import com.luis.multiportal.services.CsvService;
+import com.luis.multiportal.services.ProcessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -30,6 +34,10 @@ public class CsvController {
 
     @Autowired
     private CsvService csvService;
+    @Autowired
+    private ProcessService processService;
+    @Autowired
+    private ProcessRepository processRepository;
 
     @PostMapping("/upload")
     public ResponseEntity<?> uploadCsv(@RequestParam("file") MultipartFile file) {
@@ -39,6 +47,10 @@ public class CsvController {
 
             Map<String, Long> contagemPorSexo = csvService.contarPorSexo();
             Map<String, Double> mediaIdadePorSexo = csvService.calcularMediaIdadePorSexo();
+
+            Process newProcess = new Process();
+
+            processService.create(newProcess, file, persons, contagemPorSexo, mediaIdadePorSexo);
 
             return ResponseEntity.ok(Map.of(
                     "message", "Arquivo processado com sucesso",
@@ -92,9 +104,9 @@ public class CsvController {
         return csvService.buscarPaginado(pageable);
     }
 
-
     @GetMapping
     public ResponseEntity<List<Persons>> listarTodos() {
         return ResponseEntity.ok(csvService.listarTodos());
     }
+
 }

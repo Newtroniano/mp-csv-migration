@@ -26,4 +26,3 @@ document.getElementById("cadastro-form").addEventListener("submit", async functi
   }
 });
 
-function voltar(){window.location.href = '/';}

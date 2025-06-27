@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Resumo de Processamento</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<h1>Resumo de Processamento</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Arquivo</th>
+        <th>Total</th>
+        <th>Feminino</th>
+        <th>Masculino</th>
+        <th>Média Idade F</th>
+        <th>Média Idade M</th>
+        <th>Processado em</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="process : ${page.content}">
+        <td th:text="${process.id}"></td>
+        <td th:text="${process.fileName}"></td>
+        <td th:text="${process.totalRecords}"></td>
+        <td th:text="${process.femaleCount}"></td>
+        <td th:text="${process.maleCount}"></td>
+        <td th:text="${process.averageAgeFemale}"></td>
+        <td th:text="${process.averageAgeMale}"></td>
+        <td th:text="${process.processedAt}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div>
+    <span th:text="'Página ' + ${page.number + 1} + ' de ' + ${page.totalPages}"></span>
+</div>
+
+<div>
+    <a th:if="${page.hasPrevious()}"
+       th:href="@{/process/summary(page=${page.number - 1},size=${page.size})}">Anterior</a>
+
+    <a th:if="${page.hasNext()}"
+       th:href="@{/process/summary(page=${page.number + 1},size=${page.size})}">Próxima</a>
+
+    <button type="button" onclick="uploadPage()">Voltar</button>
+    <button onclick="voltar()">Main</button>
+</div>
+<script th:src="@{/js/Helper.js}"></script>
+</body>
+</html>

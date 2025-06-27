@@ -1,6 +1,8 @@
 package com.luis.multiportal.controllers;
 
 import com.luis.multiportal.dto.PersonsDTO;
+import com.luis.multiportal.models.Process;
+import com.luis.multiportal.repositoreis.ProcessRepository;
 import com.luis.multiportal.services.CsvService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,6 +25,8 @@ public class ViewController {
     public String index() {
         return "index";
     }
+    @Autowired
+    private ProcessRepository processRepository;
 
     @GetMapping("/upload")
     public String upload(Model model, Principal principal, @RequestParam(defaultValue = "0") int page) {
@@ -49,4 +53,10 @@ public class ViewController {
         return "login";
     }
 
+    @GetMapping("/summary")
+    public String summary(Model model, Pageable pageable) {
+        Page<Process> page = processRepository.findAllByOrderByFileNameAsc(pageable);
+        model.addAttribute("page", page);
+        return "summary";
+    }
 }

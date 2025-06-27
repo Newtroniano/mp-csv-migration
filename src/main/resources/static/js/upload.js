@@ -225,4 +225,5 @@ async function carregarPagina(page) {
     }
 }
 window.onload = () => carregarPagina(0);
-function voltar(){window.location.href = '/';}
+
+
